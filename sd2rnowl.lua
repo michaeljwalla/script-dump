@@ -1,19 +1,14 @@
-
-shared.track, shared.name = nil, nil --optional tracers to track a player (set first var to a username, 2nd var is optional nickname)
-local lp = game.Players.LocalPlayer
-print('checking whitelist..')
 --[[
-
-whitelist system removed, enjoy unobfuscated
-
+shared.track, shared.name = nil, nil --optional tracers to track a player (set first var to a username, 2nd var is optional nickname)
 ]]
-
+local lp = game.Players.LocalPlayer
 local reloaded
 if _G.connections then reloaded = true for i,v in pairs(_G.connections) do v:Disconnect() end end
 if _G.tracers then for i,v in pairs(_G.tracers) do v.Tracer:Destroy() v.Billboard:Destroy() end end
 if game.CoreGui:FindFirstChild("bellgui") then game.CoreGui.bellgui:Destroy() end
 if _G.update then _G.update = false end
-game.RunService.RenderStepped:Wait()
+game.RunService.RenderStepped:Wait() --should take code out of the render step to get better peformance
+--but i dont care that much bc my pc is good
 
 if not lp.Character then game.ReplicatedStorage.Remotes.Ready:FireServer() lp.CharacterAdded:Wait() end
 local t = lp.Character:WaitForChild("HumanoidRootPart", 5)
